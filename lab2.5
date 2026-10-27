@@ -1,0 +1,21 @@
+import timeit
+stroki = """
+a, b, c, d, e = "Ура", "это", "последнее", "задание", "и"
+f, g, h, i, k = "я", "пойду", "отдыхать", "и", "кайфовать"
+template = "{a} {b} {c} {d} {e} {f}: {g}, {h}, {i} — {k}"
+"""
+pop = '''k
+r = (a + " " + b + " " + c + " " + d + " " +
+     e + " " + f + ": " +
+     g + ", " + h + ", " + i + " — " + k)
+'''
+N = 1000000
+t = timeit.timeit(stmt=pop, setup=stroki, number=N)
+print(t)
+pop = "r = template.format(a=a, b=b, c=c, d=d, e=e, f=f, g=g, h=h, i=i, k=k)"
+t = timeit.timeit(stmt=pop, setup=stroki, number=N)
+print(t)
+pop = 'r = f"{a} {b} {c} {d} {e} {f}: {g}, {h}, {i} — {k}"'
+t = timeit.timeit(stmt=pop, setup=stroki, number=N)
+print(t)
+
